@@ -25,6 +25,6 @@ after_success: |
     git add ./repo
     git -c user.name='travis' -c user.email='travis' commit -m "Travis: Update $TRAVIS_REPO_SLUG ($TRAVIS_BUILD_NUMBER)"
     # Push
-    ssh-agent bash -c "ssh-add deploy_gh_pages; git push"
+    ssh-agent bash -c "ssh-add $OLDPWD/deploy_gh_pages; git push"
     cd "$TRAVIS_BUILD_DIR"
   fi
