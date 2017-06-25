@@ -1,12 +1,10 @@
 language: java
 jdk:
-- oraclejdk7
-- openjdk6
+- oraclejdk8
+- openjdk7
 before_install:
 - openssl aes-256-cbc -K $encrypted_a7d513d1064e_key -iv $encrypted_a7d513d1064e_iv
   -in deploy_gh_pages.enc -out deploy_gh_pages -d
-script:
-- ./gradlew test
 after_success: |
   if [ "$TRAVIS_BRANCH"  == "master" ] && [ -z "$TRAVIS_PULL_REQUEST" ]; then
     cd "$TRAVIS_BUILD_DIR"
