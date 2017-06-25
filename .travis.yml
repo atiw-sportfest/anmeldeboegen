@@ -12,19 +12,18 @@ after_success: |
   echo TRAVIS_BRANCH $TRAVIS_BRANCH
   echo TRAVIS_PULL_REQUEST $TRAVIS_PULL_REQUEST
   if [ "$TRAVIS_BRANCH"  == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-    cd "$TRAVIS_BUILD_DIR"
+    cd "$TRAVIS_BUILD_DIR" && echo $PWD
     # Setup
-    ssh-add deploy_gh_pages
-    git clone "git@github.com:atiw-sportfest/atiw.sportfest.github.io" ../gh-pages
+    ssh-agent bash -c "ssh-add deploy_gh_pages; git clone git@github.com:atiw-sportfest/atiw.sportfest.github.io ../gh-pages"
     # Generate repo
     ./gradlew uploadArchives
     # Sync
     rsync -rua $RSYNC_EXTRA repo/ ../gh-pages/repo/
     # Update
-    cd ../gh-pages/
+    cd ../gh-pages/ && echo $PWD
     git add ./repo
     git -c user.name='travis' -c user.email='travis' commit -m "Travis: Update $TRAVIS_REPO_SLUG ($TRAVIS_BUILD_NUMBER)"
     # Push
-    git push
+    ssh-agent bash -c "ssh-add deploy_gh_pages; git push"
     cd "$TRAVIS_BUILD_DIR"
   fi
