@@ -3,6 +3,8 @@ apply plugin: 'application'
 apply plugin: 'maven'
 
 mainClassName = 'excel.test.ExportMain'
+
+group = "de.atiw.sportfest"
 version = "0.1.0"
 
 sourceSets {
