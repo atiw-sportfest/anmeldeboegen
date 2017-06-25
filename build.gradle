@@ -23,3 +23,11 @@ dependencies {
     compile 'org.apache.poi:poi:3.16'
     compile 'org.apache.poi:poi-ooxml:3.16'
 }
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository ( url: "file://localhost${projectDir}/repo" )
+        }
+    }
+}
