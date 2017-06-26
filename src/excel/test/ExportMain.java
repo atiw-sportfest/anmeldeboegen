@@ -34,20 +34,20 @@ public class ExportMain {
 		schueler.add(new DBToExcelSchueler("Wennemaring", "David", 20));
 		
 		List<DBToExcelDisziplin> disziplinen = new ArrayList<DBToExcelDisziplin>();
-		disziplinen.add(new DBToExcelDisziplin("2000m Lauf", 1, false, true, 3, 3));
-		disziplinen.add(new DBToExcelDisziplin("4x100m Staffel", 2, false, true, 4, 4));
-		disziplinen.add(new DBToExcelDisziplin("Baseball", 3, false, false, 5, 5));
-		disziplinen.add(new DBToExcelDisziplin("Basketball", 4, false, false, 5, 5));
-		disziplinen.add(new DBToExcelDisziplin("Beach - Volleyball", 5, true, false, 3, 3));
-		disziplinen.add(new DBToExcelDisziplin("Frisbee", 6, false, false, 5, 5));
-		disziplinen.add(new DBToExcelDisziplin("Fuﬂball", 7, true, false, 5, 5));
-		disziplinen.add(new DBToExcelDisziplin("Hochstrung", 8, false, true, 3, 3));
-		disziplinen.add(new DBToExcelDisziplin("Hockey", 9, true, false, 4, 4));
-		disziplinen.add(new DBToExcelDisziplin("Kisten waagerecht", 10, true, false, 5, 5));
-		disziplinen.add(new DBToExcelDisziplin("Medizinballweitwurf", 11, false, true, 5, 5));
-		disziplinen.add(new DBToExcelDisziplin("Weitsprung", 12, false, true, 5, 5));
-		
-		String path = "C:\\Users\\Jonas\\Desktop\\ExcelTest\\Test.xlsx";
+		disziplinen.add(new DBToExcelDisziplin("2000m Lauf", 1, false, 3, 3));
+		disziplinen.add(new DBToExcelDisziplin("4x100m Staffel", 2, false, 4, 4));
+		disziplinen.add(new DBToExcelDisziplin("Baseball", 3, false, 5, 5));
+		disziplinen.add(new DBToExcelDisziplin("Basketball", 4, false, 5, 5));
+		disziplinen.add(new DBToExcelDisziplin("Beach - Volleyball", 5, true, 3, 3));
+		disziplinen.add(new DBToExcelDisziplin("Frisbee", 6, false, 5, 5));
+		disziplinen.add(new DBToExcelDisziplin("Fuﬂball", 7, true, 5, 5));
+		disziplinen.add(new DBToExcelDisziplin("Hochstrung", 8, false, 3, 3));
+		disziplinen.add(new DBToExcelDisziplin("Hockey", 9, true, 4, 4));
+		disziplinen.add(new DBToExcelDisziplin("Kisten waagerecht", 10, true, 5, 5));
+		disziplinen.add(new DBToExcelDisziplin("Medizinballweitwurf", 11, false, 5, 5));
+		disziplinen.add(new DBToExcelDisziplin("Weitsprung", 12, false, 5, 5));
+				
+		String path = System.getProperty("user.dir") + "\\Test.xlsx";
 		String klasse = "FS151";
 		
 		try {

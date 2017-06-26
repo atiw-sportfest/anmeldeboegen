@@ -29,7 +29,6 @@ public class DBToExcelExporter {
 
 	private static int z1 = 0;
 	private static int z2 = 0;
-	private static int z3 = 0;
 	private static int zA = 0;
 
 	public static void export(String path, String klasse, List<DBToExcelSchueler> schueler, List<DBToExcelDisziplin> disziplinen) throws FileNotFoundException {
@@ -77,15 +76,6 @@ public class DBToExcelExporter {
 		rotationStyleOrange.setBorderLeft(BorderStyle.THIN);
 		rotationStyleOrange.setBorderRight(BorderStyle.THIN);
 
-		XSSFCellStyle rotationStyleYellow = workbook.createCellStyle();
-		rotationStyleYellow.setFillForegroundColor(new XSSFColor(new byte[] { (byte) 255, (byte) 255, (byte) 0 }));
-		rotationStyleYellow.setRotation((short) 90);
-		rotationStyleYellow.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-		rotationStyleYellow.setBorderTop(BorderStyle.THIN);
-		rotationStyleYellow.setBorderBottom(BorderStyle.THICK);
-		rotationStyleYellow.setBorderLeft(BorderStyle.THIN);
-		rotationStyleYellow.setBorderRight(BorderStyle.THIN);
-
 		XSSFCellStyle rotationStyleGreen = workbook.createCellStyle();
 		rotationStyleGreen.setFillForegroundColor(new XSSFColor(new byte[] { (byte) 198, (byte) 224, (byte) 180 }));
 		rotationStyleGreen.setRotation((short) 90);
@@ -101,15 +91,10 @@ public class DBToExcelExporter {
 			Cell cell1 = sheet.getRow(2).createCell(j + 3);
 			if (disziplinen.get(j).isMannschaft()) {
 				cell1.setCellStyle(rotationStyleGreen);
-				z3++;
+				z2++;
 			} else {
-				if (disziplinen.get(j).isZusatzpunkt()) {
-					cell1.setCellStyle(rotationStyleOrange);
-					z1++;
-				} else {
-					cell1.setCellStyle(rotationStyleYellow);
-					z2++;
-				}
+				cell1.setCellStyle(rotationStyleOrange);
+				z1++;
 			}
 			cell1.setCellValue(disziplinen.get(j).getName());
 
@@ -132,14 +117,6 @@ public class DBToExcelExporter {
 		styleOrange.setBorderLeft(BorderStyle.THIN);
 		styleOrange.setBorderRight(BorderStyle.THIN);
 
-		XSSFCellStyle styleYellow = workbook.createCellStyle();
-		styleYellow.setFillForegroundColor(new XSSFColor(new byte[] { (byte) 255, (byte) 255, (byte) 0 }));
-		styleYellow.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-		styleYellow.setAlignment(HorizontalAlignment.CENTER);
-		styleYellow.setVerticalAlignment(VerticalAlignment.CENTER);
-		styleYellow.setBorderLeft(BorderStyle.THIN);
-		styleYellow.setBorderRight(BorderStyle.THIN);
-
 		XSSFCellStyle styleGreen = workbook.createCellStyle();
 		styleGreen.setFillForegroundColor(new XSSFColor(new byte[] { (byte) 198, (byte) 224, (byte) 180 }));
 		styleGreen.setFillPattern(FillPatternType.SOLID_FOREGROUND);
@@ -150,38 +127,28 @@ public class DBToExcelExporter {
 		styleGreen.setBorderLeft(BorderStyle.THIN);
 		styleGreen.setBorderRight(BorderStyle.THIN);
 
-		CellRangeAddress cra1 = new CellRangeAddress(1, 1, 3, 3 + z1 - 1);
-		CellRangeAddress cra21 = new CellRangeAddress(0, 0, 3, 3 + z1 + z2 - 1);
-		CellRangeAddress cra22 = new CellRangeAddress(1, 1, 3 + z1, 3 + z1 + z2 - 1);
-		CellRangeAddress cra3 = new CellRangeAddress(0, 1, 3 + z1 + z2, 3 + z1 + z2 + z3 - 1);
-		sheet.addMergedRegion(cra1);
-		sheet.addMergedRegion(cra21);
-		sheet.addMergedRegion(cra22);
-		sheet.addMergedRegion(cra3);
+		if (z1 > 0) {
+			CellRangeAddress cra = new CellRangeAddress(1, 1, 3, 3 + z1 - 1);
+			sheet.addMergedRegion(cra);
+		}
+
+		if (z2 > 0) {
+			CellRangeAddress cra = new CellRangeAddress(1, 1, 3 + z1, 3 + z1 + z2 - 1);
+			sheet.addMergedRegion(cra);
+		}
 
 		sheet.createRow(0);
 		sheet.createRow(1);
 		for (int i = 3; i < 3 + z1; i++) {
-			Cell headercell1 = sheet.getRow(1).createCell(i);
-			headercell1.setCellStyle(styleOrange);
-			headercell1.setCellValue("mit Zusatzpunkt für die Besten");
+			Cell headercell = sheet.getRow(1).createCell(i);
+			headercell.setCellStyle(styleOrange);
+			headercell.setCellValue("Individualsportarten");
 		}
 
-		for (int i = 3; i < 3 + z1; i++) {
-			Cell headercell21 = sheet.getRow(0).createCell(i);
-			headercell21.setCellStyle(styleYellow);
-			headercell21.setCellValue("Individualsportarten");
-		}
-
-		for (int i = 3 + z1; i < 3 + z1 + z2; i++) {
-			Cell headercell22 = sheet.getRow(1).createCell(i);
-			headercell22.setCellStyle(styleYellow);
-		}
-
-		for (int i = 3 + z1 + z2; i < 3 + z1 + z2 + z3 - 1; i++) {
-			Cell headercell3 = sheet.getRow(0).createCell(i);
-			headercell3.setCellStyle(styleGreen);
-			headercell3.setCellValue("Manschaftssportarten");
+		for (int i = 3 + z1; i < 3 + z1 + z2 - 1; i++) {
+			Cell headercell = sheet.getRow(1).createCell(i);
+			headercell.setCellStyle(styleGreen);
+			headercell.setCellValue("Manschaftssportarten");
 		}
 	}
 
@@ -216,7 +183,7 @@ public class DBToExcelExporter {
 			row.setHeight((short) (row.getHeight() * 0.9f));
 		}
 
-		for (int i = 3; i < 3 + z1 + z2 + z3; i++) {
+		for (int i = 3; i < 3 + z1 + z2; i++) {
 			sheet.setColumnWidth(i, (int) (sheet.getColumnWidth(i) * 1.7f));
 		}
 
@@ -249,7 +216,7 @@ public class DBToExcelExporter {
 
 		for (int i = 0; i < schueler.size(); i++) {
 			for (int j = 0; j < disziplinen.size(); j++) {
-				if (j + 3 == 3 + z1 || j + 3 == 3 + z1 + z2) {
+				if (j + 3 == 3 + z1 || j + 3 == 3 + z1) {
 					sheet.getRow(i + 4).createCell(j + 3).setCellStyle(borderstyleLeft);
 				} else {
 					sheet.getRow(i + 4).createCell(j + 3).setCellStyle(borderstyle);
@@ -266,10 +233,12 @@ public class DBToExcelExporter {
 		borderstyle.setBorderRight(BorderStyle.THICK);
 		borderstyle.setVerticalAlignment(VerticalAlignment.CENTER);
 
-		zA = 3 + z1 + z2 + z3;
-		String formel2 = "IF(COUNTA(Dy:Oy)<2,\"Es fehlen noch Einträge\"," + "IF(COUNTA(Dy:Oy)<5,\"Noch Belegungen möglich\"," + "IF(COUNTA(Dy:Oy)>5,\"Max 5. Einträge zulässig, bitte korrigieren\","
+		zA = 3 + z1 + z2;
+		String formel2 = "IF(COUNTA(Dy:qy)<2,\"Es fehlen noch Einträge\"," + "IF(COUNTA(Dy:qy)<5,\"Noch Belegungen möglich\"," + "IF(COUNTA(Dy:qy)>5,\"Max 5. Einträge zulässig, bitte korrigieren\","
 				+ "\"Super Beteiligung\")))";
 
+		formel2 = formel2.replace("q", ""+(char) (65 + 2 + z1 + z2));
+		
 		for (int i = 0; i < schueler.size(); i++) {
 			sheet.getRow(4 + i).createCell(zA).setCellFormula(formel2.replace("y", "" + (5 + i)));
 			sheet.getRow(4 + i).getCell(zA).setCellStyle(borderstyle);
@@ -373,18 +342,16 @@ public class DBToExcelExporter {
 
 			cell3 = row3.createCell(i);
 			cell3.setCellFormula(formula3.replace("x", "" + (char) (65 + i)).replace("y", "" + disziplinen.get(i - 3).getMin()).replace("z", "" + disziplinen.get(i - 3).getMax()));
-			
 
-			if (i == 3 + z1 || i == 3 + z1 + z2) {
+			if (i == 3 + z1 || i == 3 + z1) {
 				cell1.setCellStyle(borderstyle3Left);
 				cell2.setCellStyle(borderstyle5Left);
 				cell3.setCellStyle(borderstyle3Left);
-			}else{
+			} else {
 				cell1.setCellStyle(borderstyle3);
 				cell2.setCellStyle(borderstyle5);
-				cell3.setCellStyle(borderstyle3);				
+				cell3.setCellStyle(borderstyle3);
 			}
-			
 
 			row4.createCell(i).setCellStyle(borderstyle6);
 		}
