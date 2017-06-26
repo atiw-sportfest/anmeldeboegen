@@ -2,6 +2,7 @@ package excel.imports;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,12 +11,15 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelToDBImporter {
 
-	@SuppressWarnings("resource")
 	public static List<ExcelToDBTeilnahme> importTeilnahmen(String path) throws IOException{
+		return importTeilnahmen(new FileInputStream(path));
+	}
+	
+	@SuppressWarnings("resource")
+	public static List<ExcelToDBTeilnahme> importTeilnahmen(InputStream inputStream) throws IOException{
 		List<ExcelToDBTeilnahme> teilnahmen = new ArrayList<>();
 		
-		FileInputStream fileInputStream = new FileInputStream(path);
-		XSSFSheet sheet = new XSSFWorkbook(fileInputStream).getSheet("Anmeldebogen");
+		XSSFSheet sheet = new XSSFWorkbook(inputStream).getSheet("Anmeldebogen");
 		
 		String klasse = sheet.getRow(0).getCell(1).getStringCellValue();
 		int schuelerCount = (int) sheet.getRow(1).getCell(0).getNumericCellValue();

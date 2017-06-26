@@ -9,7 +9,7 @@ import excel.imports.ExcelToDBTeilnahme;
 public class ImportMain {
 
 	public static void main(String[] args) {
-		String path = "C:\\Users\\Jonas\\Desktop\\ExcelTest\\Test2.xlsx";
+		String path = System.getProperty("user.dir") + "\\Test.xlsx";
 
 		try {
 			List<ExcelToDBTeilnahme> teilnahmen = ExcelToDBImporter.importTeilnahmen(path);
