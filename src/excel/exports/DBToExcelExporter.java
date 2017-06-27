@@ -62,6 +62,10 @@ public class DBToExcelExporter {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		z1 = 0; 
+		z2 = 0; 
+		zA = 0; 
 
 		System.out.println("Done");
 	}
