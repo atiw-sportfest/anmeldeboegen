@@ -40,7 +40,7 @@ public class ExportMain {
 		disziplinen.add(new DBToExcelDisziplin("Basketball", 4, false, 5, 5));
 		disziplinen.add(new DBToExcelDisziplin("Beach - Volleyball", 5, true, 3, 3));
 		disziplinen.add(new DBToExcelDisziplin("Frisbee", 6, false, 5, 5));
-		disziplinen.add(new DBToExcelDisziplin("Fuﬂball", 7, true, 5, 5));
+		disziplinen.add(new DBToExcelDisziplin("Fu√üball", 7, true, 5, 5));
 		disziplinen.add(new DBToExcelDisziplin("Hochstrung", 8, false, 3, 3));
 		disziplinen.add(new DBToExcelDisziplin("Hockey", 9, true, 4, 4));
 		disziplinen.add(new DBToExcelDisziplin("Kisten waagerecht", 10, true, 5, 5));

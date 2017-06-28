@@ -238,7 +238,7 @@ public class DBToExcelExporter {
 		borderstyle.setVerticalAlignment(VerticalAlignment.CENTER);
 
 		zA = 3 + z1 + z2;
-		String formel2 = "IF(COUNTA(Dy:qy)<2,\"Es fehlen noch Eintr‰ge\"," + "IF(COUNTA(Dy:qy)<5,\"Noch Belegungen mˆglich\"," + "IF(COUNTA(Dy:qy)>5,\"Max 5. Eintr‰ge zul‰ssig, bitte korrigieren\","
+		String formel2 = "IF(COUNTA(Dy:qy)<2,\"Es fehlen noch Eintr√§ge\"," + "IF(COUNTA(Dy:qy)<5,\"Noch Belegungen m√∂glich\"," + "IF(COUNTA(Dy:qy)>5,\"Max 5. Eintr√§ge zul√§ssig, bitte korrigieren\","
 				+ "\"Super Beteiligung\")))";
 
 		formel2 = formel2.replace("q", ""+(char) (65 + 2 + z1 + z2));
