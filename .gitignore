@@ -2,3 +2,4 @@ build
 .gradle
 Test.xlsx
 .~lock*
+ExportText.xsls

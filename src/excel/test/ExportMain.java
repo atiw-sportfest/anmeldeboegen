@@ -49,11 +49,10 @@ public class ExportMain {
 		disziplinen.add(new DBToExcelDisziplin("Medizinballweitwurf", 11, false, 5, 5));
 		disziplinen.add(new DBToExcelDisziplin("Weitsprung", 12, false, 5, 5));
 				
-		String path = System.getProperty("user.dir") + "\\Test.xlsx";
 		String klasse = "FS151";
 		
 		try {
-			DBToExcelExporter.export(new FileOutputStream(path), klasse, schueler, disziplinen);
+			DBToExcelExporter.export(new FileOutputStream("ExportText.xsls"), klasse, schueler, disziplinen);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
