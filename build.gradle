@@ -1,11 +1,14 @@
-apply plugin: 'java'
-apply plugin: 'application'
-apply plugin: 'maven'
+plugins {
+    id 'java'
+    id 'application'
+    id 'maven'
+    id 'com.scuilion.syntastic' version '0.3.8'
+}
 
 mainClassName = 'excel.test.ExportMain'
 
 group = "de.atiw.sportfest"
-version = "0.1.3"
+version = "0.1.4"
 
 sourceSets {
     main {
