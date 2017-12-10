@@ -3,6 +3,7 @@ package excel.exports;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Comparator;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.util.CellRangeAddress;
+
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFColor;
@@ -31,7 +33,7 @@ public class DBToExcelExporter {
 	private static int z2 = 0;
 	private static int zA = 0;
 
-	public static void export(String path, String klasse, List<DBToExcelSchueler> schueler, List<DBToExcelDisziplin> disziplinen) throws FileNotFoundException {
+	public static void export(OutputStream os, String klasse, List<DBToExcelSchueler> schueler, List<DBToExcelDisziplin> disziplinen) throws IOException {
 
 		disziplinen.sort(new Comparator<DBToExcelDisziplin>() {
 			@Override
@@ -54,11 +56,8 @@ public class DBToExcelExporter {
 		sheet.getRow(0).createCell(1).setCellValue(klasse);
 
 		try {
-			FileOutputStream outputStream = new FileOutputStream(path);
-			workbook.write(outputStream);
+			workbook.write(os);
 			workbook.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

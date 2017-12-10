@@ -1,6 +1,8 @@
 package excel.test;
 
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,8 +53,8 @@ public class ExportMain {
 		String klasse = "FS151";
 		
 		try {
-			DBToExcelExporter.export(path, klasse, schueler, disziplinen);
-		} catch (FileNotFoundException e) {
+			DBToExcelExporter.export(new FileOutputStream(path), klasse, schueler, disziplinen);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		

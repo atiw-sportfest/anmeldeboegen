@@ -15,7 +15,6 @@ public class ExcelToDBImporter {
 		return importTeilnahmen(new FileInputStream(path));
 	}
 	
-	@SuppressWarnings("resource")
 	public static List<ExcelToDBTeilnahme> importTeilnahmen(InputStream inputStream) throws IOException{
 		List<ExcelToDBTeilnahme> teilnahmen = new ArrayList<>();
 		
